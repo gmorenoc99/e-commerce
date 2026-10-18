@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 import type { Product } from "../types/product";
 
 export interface CartItem extends Product {
@@ -15,11 +15,24 @@ interface CartContextType {
     totalPrice: number;
 }
 
+const CART_STORAGE_KEY = "ecommerce-cart";
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext({} as CartContextType);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [cart, setCart] = useState<CartItem[]>([]);
+    const [cart, setCart] = useState<CartItem[]>(() => {
+        try {
+            const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+            return storedCart ? (JSON.parse(storedCart) as CartItem[]) : [];
+        } catch {
+            return [];
+        }
+    });
+
+    useEffect(() => {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    }, [cart]);
 
     const addItem = (product: Product, quantity: number) => {
         setCart((prevCart) => {
