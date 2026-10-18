@@ -112,4 +112,4 @@ Abre en el navegador la URL que indique Vite, normalmente `http://localhost:5173
 - **Carrito (`/cart`)**: abre el icono del carrito para revisar productos, eliminar artículos o vaciarlo y completar los datos del comprador.
 - **Compras (`/orders`)**: abre el menú de usuario y selecciona “Mis Compras”; desde el historial puedes consultar el detalle de cada orden.
 
-Al confirmar la compra, la aplicación valida y descuenta el stock en JSON Server, registra la orden y muestra un comprobante con su código. El carrito se mantiene en memoria y no persiste después de recargar la página.
+Al confirmar la compra, la aplicación valida y descuenta el stock en JSON Server, registra la orden y muestra un comprobante con su código.
